@@ -25,6 +25,10 @@ export class HomePage implements OnInit {
     return;
   }
 
+  IrConfiguracion(){
+    return;
+  }
+
   Salir(){
     window.location.href = "/inicio";
   }
