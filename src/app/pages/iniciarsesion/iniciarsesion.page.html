@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Regresar"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center ion-padding">
+  <img src="assets/loboBuap.jpg">
+  <br>
+
+  <form  #formularioInicio="ngForm" (ngSubmit)="onSubmit()" class="ion-padding">
+    <ion-item>
+      <ion-input name="email" [(ngModel)]="Usuario.email" type="email" placeholder="Correo" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input name="password" [(ngModel)]="Usuario.password" type="password" placeholder="Contraseña" required></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" size="large" expand="block" [disabled] = "formularioInicio.invalid">
+      Iniciar Sesión
+    </ion-button>
+
+  </form>
+
+</ion-content>
