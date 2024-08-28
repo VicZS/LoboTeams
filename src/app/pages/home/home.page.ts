@@ -13,4 +13,20 @@ export class HomePage implements OnInit {
     return;
   }
 
+  IrChats(){
+    return;
+  }
+
+  IrCalendario(){
+    return;
+  }
+
+  IrActividades(){
+    return;
+  }
+
+  Salir(){
+    window.location.href = "/inicio";
+  }
+
 }
