@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Calendario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-datetime presentation="date" [highlightedDates]="highlightedDates"> </ion-datetime>
+
+  <br>
+
+  <ion-list>
+    <h2>Actividades</h2>
+
+    <ion-item>
+      <ion-icon slot="start" name="journal"></ion-icon>
+      <ion-label>Awesome Label</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

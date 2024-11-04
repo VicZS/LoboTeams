@@ -28,7 +28,7 @@ export class RegistrarsePage implements OnInit {
   onSubmit(){
     if(this.Usuario.password == this.Usuario.confirmpassword){
 
-      if(this.Usuario.password.length > 8){
+      if(this.Usuario.password.length >= 8){
         if(this.esEmailValido(this.Usuario.email)){
           console.log(this.Usuario);
 

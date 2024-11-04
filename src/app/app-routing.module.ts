@@ -31,6 +31,18 @@ const routes: Routes = [
     path: 'chats',
     loadChildren: () => import('./pages/chats/chats.module').then( m => m.ChatsPageModule)
   },
+  {
+    path: 'calendario',
+    loadChildren: () => import('./pages/calendario/calendario.module').then( m => m.CalendarioPageModule)
+  },
+  {
+    path: 'actividades',
+    loadChildren: () => import('./pages/actividades/actividades.module').then( m => m.ActividadesPageModule)
+  },
+  {
+    path: 'actividad',
+    loadChildren: () => import('./pages/actividad/actividad.module').then( m => m.ActividadPageModule)
+  },
 ];
 
 @NgModule({

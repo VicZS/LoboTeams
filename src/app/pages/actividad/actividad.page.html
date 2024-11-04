@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title> Actividad </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  
+  <h2>{{actividad.title}} </h2>
+  <h4> {{actividad.indicaciones}} </h4>
+
+  <ion-button *ngIf="!usuario.entregado" (click)="mostrarAlerta()" fill="clear" size="large" id="botonEntregar">
+    <ion-icon size="large" slot="icon-only" name="add-circle-outline"></ion-icon>
+    <h5>Entregar</h5>
+  </ion-button>
+
+  <h5 *ngIf="usuario.entregado">Actividad Entregada <br> </h5>
+  <button *ngIf="usuario.linkActividadCompletada" (click)="abrirLink()" fill="clear"> {{usuario.linkActividadCompletada}} </button>
+
+</ion-content>

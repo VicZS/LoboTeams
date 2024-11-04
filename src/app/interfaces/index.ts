@@ -10,3 +10,19 @@ export interface LoginResponse {
     };
     token: string;
 }
+
+export interface UsuarioActividad{
+    id: number;
+    idOnwer:number;
+    entregado: boolean;
+    linkActividadCompletada: string;
+}
+
+export interface Actividad{
+    id: number;
+    idOnwer:number;
+    title: string;
+    indicaciones: string;
+    fecha: string;
+    usuariosAsignados:UsuarioActividad[];
+}

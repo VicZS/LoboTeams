@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
   }
 
   IrCalendario(){
-    return;
+    window.location.href = "/calendario"
   }
 
   IrActividades(){
