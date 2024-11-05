@@ -19,7 +19,7 @@ export class RegistrarsePage implements OnInit {
 
   Usuario = {
     nombre: '',
-    apellido: '',
+    // apellido: '',
     email: '',
     password: '',
     confirmpassword: ''

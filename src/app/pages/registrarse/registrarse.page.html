@@ -15,27 +15,27 @@
 
   <form  #formularioInicio="ngForm" (ngSubmit)="onSubmit()" class="ion-padding">
 
+    <ion-item class="ion-padding-top">
+      <ion-input labelPlacement="floating" name="nombre" [(ngModel)]="Usuario.nombre" type="text" label="Nombre" required></ion-input >
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-input  name="apellido" [(ngModel)]="Usuario.apellido" type="text" placeholder="Apellido" required></ion-input >
+    </ion-item> -->
+
     <ion-item>
-      <ion-input name="nombre" [(ngModel)]="Usuario.nombre" type="text" placeholder="Nombre" required></ion-input>
+      <ion-input labelPlacement="floating" name="email" [(ngModel)]="Usuario.email" type="email" label="Correo" required></ion-input >
     </ion-item>
 
     <ion-item>
-      <ion-input name="apellido" [(ngModel)]="Usuario.apellido" type="text" placeholder="Apellido" required></ion-input>
+      <ion-input labelPlacement="floating" name="password" [(ngModel)]="Usuario.password" type="password" label="Contraseña" required></ion-input >
     </ion-item>
 
-    <ion-item>
-      <ion-input name="email" [(ngModel)]="Usuario.email" type="email" placeholder="Correo" required></ion-input>
+    <ion-item class="ion-padding-bottom">
+      <ion-input labelPlacement="floating" name="confirmpassword" [(ngModel)]="Usuario.confirmpassword" type="password" label="Confirmar Contraseña" required></ion-input >
     </ion-item>
 
-    <ion-item>
-      <ion-input name="password" [(ngModel)]="Usuario.password" type="password" placeholder="Contraseña" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input name="confirmpassword" [(ngModel)]="Usuario.confirmpassword" type="password" placeholder="Confirmar Contraseña" required></ion-input>
-    </ion-item>
-
-    <ion-button type="submit" size="large" expand="block" [disabled]="formularioInicio.invalid">
+    <ion-button shape="round" type="submit" size="large" [disabled]="formularioInicio.invalid" class="ion-padding-vertical">
       Registrarse
     </ion-button>
 

@@ -1,27 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>LoboTeams</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-text-center ion-padding">
-  <img src="assets/loboBuap.jpg" alt="">
-
-  <ion-button fill="clear" routerLink="/iniciarsesion">
-    <ion-item>
-      <ion-icon name="person" slot="start" size="large"></ion-icon>
-      <ion-label>Iniciar Sesión</ion-label>
-    </ion-item>
+  <ion-card class="ion-padding ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Lobo Teams</ion-card-title>
+    </ion-card-header>
+    <img  class="img" src="assets/loboBuap.jpg">
     
-  </ion-button>
-
-  <br>
-
-  <ion-button fill="clear" routerLink="/registrarse">
-    <ion-item>
-      <ion-icon name="person" slot="start" size="large"></ion-icon>
-      <ion-label>Registrarse</ion-label>
-    </ion-item>
-  </ion-button>
-
+    <ion-card-content>
+      <ion-button shape="round" fill="clear" routerLink="/iniciarsesion" class="ion-padding-horizontal">
+        
+          <ion-icon name="log-in" slot="icon-only" size="large"></ion-icon>
+          Iniciar Sesión
+        
+      </ion-button>
+  
+      <ion-button shape="round" fill="clear" routerLink="/registrarse" class="ion-padding-horizontal">
+        
+          <ion-icon name="person-add" slot="icon-only" size="large"></ion-icon>
+          <ion-label>Registrarse</ion-label>
+        
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
