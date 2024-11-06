@@ -47,6 +47,8 @@ export class ActividadesPage implements OnInit {
     usuariosAsignados:this.usuarios
   }]
 
-
+  addActividad(){
+    console.log('Se Creara una nueva actividad')
+  }
 
 }

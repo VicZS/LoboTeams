@@ -5,13 +5,18 @@
     </ion-buttons>
 
     <ion-title>Actividades</ion-title>
+
+    <ion-button (click)="addActividad()" fill="clear" slot="end">
+      <ion-icon  size="large" name="add-circle-outline"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
   <ion-list>
-    <h2>Actividades</h2>
+    <h2 class="ion-padding-start">Actividades</h2>
 
     <ion-item *ngFor="let i of actividades" routerLink="/actividad">
 
