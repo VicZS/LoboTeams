@@ -28,7 +28,7 @@ export class CApisService {
       "password" : password
     }
 
-    return this.http.post<LoginResponse>('https://aftermatch.website/api/loginAPI',usuario)
+    return this.http.post<LoginResponse>('https://loboteam.aftermatch.website/api/login',usuario)
     
   }
 
@@ -36,10 +36,10 @@ export class CApisService {
     var registro = {
       "name": name,
       "email": email,
-      "password": password,
-      "password_confirmation": cpassword
+      "password": password
+      //"password_confirmation": cpassword
     }
 
-    return this.http.post('https://aftermatch.website/api/registrarseAPI',registro)
+    return this.http.post('https://loboteam.aftermatch.website/api/students',registro)
   }
 }
