@@ -42,4 +42,22 @@ export class CApisService {
 
     return this.http.post('https://loboteam.aftermatch.website/api/students',registro)
   }
+
+  PostAgregarEstudiante(idclass: number, idstudent: number){
+    var agregar = {
+      "clase_id": idclass,
+      "student_id": idstudent
+    }
+
+    return this.http.post('https://loboteam.aftermatch.website/api/clases-students',agregar)
+  }
+
+  PostUnirmeClase(token:string, code: string){
+    var unirme = {
+      "token": token,
+      "code": code
+    }
+    return this.http.post('https://loboteam.aftermatch.website/api/join-class',unirme)
+  }
+
 }
