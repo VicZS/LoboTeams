@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Actividad, UsuarioActividad } from 'src/app/interfaces';
 import { AlertController } from '@ionic/angular';
+import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
   selector: 'app-actividad',
@@ -9,9 +10,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class ActividadPage implements OnInit {
 
-  constructor(private alert:AlertController) { }
+  constructor(private alert:AlertController, private cliente:CApisService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.SesionAbierta();
+    }, 500);
     return;
   }
 
@@ -100,6 +104,20 @@ export class ActividadPage implements OnInit {
 
   abrirLink(){
     window.open(this.usuario.linkActividadCompletada, '_blank');
+  }
+
+  async SesionAbierta(){
+
+    var SesionA = await this.cliente.obtenerToken();
+    console.log(SesionA);
+
+    if(SesionA){
+      console.log("sesion abierta")
+    }else{
+      console.log("sesion noooo abierta")
+      window.location.href = "/";
+    }
+
   }
 
 }

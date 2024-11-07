@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
   selector: 'app-calendario',
@@ -7,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarioPage implements OnInit {
 
-  constructor() { }
+  constructor(private cliente:CApisService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.SesionAbierta();
+    }, 500);
+
     return;
+  }
+
+  async SesionAbierta(){
+
+    var SesionA = await this.cliente.obtenerToken();
+    console.log(SesionA);
+
+    if(SesionA){
+      console.log("sesion abierta")
+    }else{
+      console.log("sesion noooo abierta")
+      window.location.href = "/";
+    }
+
   }
 
   highlightedDates = [

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioActividad, Actividad } from '../../interfaces/index';
+import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
   selector: 'app-actividades',
@@ -8,9 +9,12 @@ import { UsuarioActividad, Actividad } from '../../interfaces/index';
 })
 export class ActividadesPage implements OnInit {
 
-  constructor() { }
+  constructor(private cliente:CApisService) { }
 
   ngOnInit(){
+    setTimeout(() => {
+      this.SesionAbierta();
+    }, 500);
     return;
   }
 
@@ -49,6 +53,20 @@ export class ActividadesPage implements OnInit {
 
   addActividad(){
     console.log('Se Creara una nueva actividad')
+  }
+
+  async SesionAbierta(){
+
+    var SesionA = await this.cliente.obtenerToken();
+    console.log(SesionA);
+
+    if(SesionA){
+      console.log("sesion abierta")
+    }else{
+      console.log("sesion noooo abierta")
+      window.location.href = "/";
+    }
+
   }
 
 }

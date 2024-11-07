@@ -14,6 +14,9 @@ export class RegistrarsePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.SesionAbierta();
+    }, 500);
     return;
   }
 
@@ -26,6 +29,8 @@ export class RegistrarsePage implements OnInit {
   }
 
   onSubmit(){
+    this.SesionAbierta();
+    
     if(this.Usuario.password == this.Usuario.confirmpassword){
 
       if(this.Usuario.password.length >= 8){
@@ -75,5 +80,11 @@ export class RegistrarsePage implements OnInit {
     return regexEmail.test(email);
   }
 
+  async SesionAbierta(){
+    var SesionA = await this.cliente.existeToken();
+    if(SesionA){
+      window.location.href = "/home";
+    }
+  }
 
 }

@@ -1,13 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase } from '../interfaces';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CApisService {
 
-  constructor( private http: HttpClient) { }
+  private _storage: Storage | null = null;
+
+  constructor( private http: HttpClient, private storage: Storage) { this.init();}
+  
+  async init() {
+    const storage = await this.storage.create();
+    this._storage = storage;
+  }
 
   get(){
     
@@ -49,7 +57,7 @@ export class CApisService {
       "student_id": idstudent
     }
 
-    return this.http.post('https://loboteam.aftermatch.website/api/clases-students',agregar)
+    return this.http.post<respuestaAgregarUnirmeClase>('https://loboteam.aftermatch.website/api/clases-students',agregar)
   }
 
   PostUnirmeClase(token:string, code: string){
@@ -57,7 +65,37 @@ export class CApisService {
       "token": token,
       "code": code
     }
-    return this.http.post('https://loboteam.aftermatch.website/api/join-class',unirme)
+    return this.http.post<respuestaAgregarUnirmeClase>('https://loboteam.aftermatch.website/api/join-class',unirme)
   }
+
+  PostCrearClase(token:string, name: string, description: string){
+    var crearClase = {
+      "token": token,
+      "name": name,
+      "descripcion": description,
+      "icono": "icono-ing"
+    }
+
+    return this.http.post<respuestaCrearClase>('https://loboteam.aftermatch.website/api/clases',crearClase)
+  }
+
+  async GuardarToken(token:string){
+    await this._storage?.set('token',token);
+    return;
+  }
+
+  async obtenerToken(): Promise<any> {
+    return await this._storage?.get('token');
+  }
+
+  async eliminarToken() {
+    await this._storage?.remove('token');
+  }
+  
+  async existeToken(): Promise<boolean> {
+    const valor = await this._storage?.get('token');
+    return valor !== null && valor !== undefined;
+  }
+  
 
 }

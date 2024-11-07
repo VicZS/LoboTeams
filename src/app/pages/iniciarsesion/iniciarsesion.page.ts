@@ -31,7 +31,10 @@ export class IniciarsesionPage implements OnInit {
     //   }
     // );
     
-
+    setTimeout(() => {
+      this.SesionAbierta();
+    }, 500);
+    
     return;
   }
 
@@ -41,6 +44,8 @@ export class IniciarsesionPage implements OnInit {
   }
 
   onSubmit(){
+    this.SesionAbierta();
+    
     console.log(this.Usuario);
 
     this.cliente.PostIniciarSesion(this.Usuario.email, this.Usuario.password).subscribe(
@@ -53,6 +58,8 @@ export class IniciarsesionPage implements OnInit {
         console.log(message);
         console.log(user);
         console.log(token);
+
+        this.GuardarT(token);
 
         window.location.href = "/home";
       },
@@ -73,4 +80,17 @@ export class IniciarsesionPage implements OnInit {
     });
     await Al.present();
   }
+
+  async GuardarT(token:string){
+    await this.cliente.GuardarToken(token);
+    console.log('Token Guardado');
+  }
+
+  async SesionAbierta(){
+    var SesionA = await this.cliente.existeToken();
+    if(SesionA){
+      window.location.href = "/home";
+    }
+  }
+
 }

@@ -26,3 +26,23 @@ export interface Actividad{
     fecha: string;
     usuariosAsignados:UsuarioActividad[];
 }
+
+export interface respuestaAgregarUnirmeClase{
+    message: string;
+}
+
+
+export interface respuestaCrearClase{
+    message:string;
+    clase:{
+        name:string;
+        descripcion:string;
+        icono: string;
+        code :string;
+        updated_at: string;
+        created_at: string;
+        id: number;
+    };
+    Docente:string;
+    Nombre:string;
+}
