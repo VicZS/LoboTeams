@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Clases</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-button (click)="AlertaCrearClase()" fill="clear" slot="end">
+      Crear Clase
+      <ion-icon  size="large" name="add-circle-outline"></ion-icon>
+    </ion-button>
+  
+    <ion-button (click)="AlertaUnirseClase()" fill="clear" slot="end" >
+      Unirse a una Clase
+      <ion-icon  size="large" name="log-in"></ion-icon>
+    </ion-button>  
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-item>
+      <h3>Clase</h3>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

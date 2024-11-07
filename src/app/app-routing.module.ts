@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'actividad',
     loadChildren: () => import('./pages/actividad/actividad.module').then( m => m.ActividadPageModule)
   },
+  {
+    path: 'clases',
+    loadChildren: () => import('./pages/clases/clases.module').then( m => m.ClasesPageModule)
+  },
+  {
+    path: 'clase',
+    loadChildren: () => import('./pages/clase/clase.module').then( m => m.ClasePageModule)
+  },
 ];
 
 @NgModule({
