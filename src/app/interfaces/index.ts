@@ -46,3 +46,27 @@ export interface respuestaCrearClase{
     Docente:string;
     Nombre:string;
 }
+
+export interface respuestaMisClasesCreadas {
+    message: string;
+    Clases: DetallesClase[];
+}
+
+export interface DetallesClase {
+    id: number;
+    clase_id: number;
+    student_id: number;
+    created_at: string;
+    updated_at: string;
+    clase: InfoClase;
+}
+
+export interface InfoClase {
+    id: number;
+    name: string;
+    descripcion: string;
+    icono: string;
+    code: string;
+    created_at: string;
+    updated_at: string;
+}

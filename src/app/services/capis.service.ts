@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -79,6 +79,14 @@ export class CApisService {
     return this.http.post<respuestaCrearClase>('https://loboteam.aftermatch.website/api/clases',crearClase)
   }
 
+  PostVerMisClasesCreadas(token:string){
+    var misClases = {
+      "token": token
+    }
+
+    return this.http.post<respuestaMisClasesCreadas>('https://loboteam.aftermatch.website/api/viewmyclass',misClases)
+  }
+
   async GuardarToken(token:string){
     await this._storage?.set('token',token);
     return;
@@ -96,6 +104,7 @@ export class CApisService {
     const valor = await this._storage?.get('token');
     return valor !== null && valor !== undefined;
   }
+  
   
 
 }

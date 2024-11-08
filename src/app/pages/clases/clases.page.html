@@ -11,20 +11,30 @@
 
 <ion-content [fullscreen]="true">
   <ion-toolbar>
-    <ion-button (click)="AlertaCrearClase()" fill="clear" slot="end">
+    <ion-button (click)="AlertaCrearClase()" fill="clear">
       Crear Clase
       <ion-icon  size="large" name="add-circle-outline"></ion-icon>
     </ion-button>
   
-    <ion-button (click)="AlertaUnirseClase()" fill="clear" slot="end" >
+    <ion-button (click)="AlertaUnirseClase()" fill="clear" >
       Unirse a una Clase
       <ion-icon  size="large" name="log-in"></ion-icon>
     </ion-button>  
   </ion-toolbar>
 
-  <ion-list>
-    <ion-item>
-      <h3>Clase</h3>
+  <ion-list class="ion-padding-horizontal">
+    <h3>Mis Clases Creadas</h3>
+    <ion-item *ngFor="let i of ClasesCreadasU">
+      <ion-label>{{i.clase.name}}</ion-label>
+      <ion-label slot="end">{{i.clase.code}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list class="ion-padding-horizontal">
+    <h3>Mis Clases</h3>
+    <ion-item *ngFor="let i of ClasesCreadasU">
+      <ion-label>{{i.clase.name}}</ion-label>
+      <ion-label slot="end">{{i.clase.code}}</ion-label>
     </ion-item>
   </ion-list>
 

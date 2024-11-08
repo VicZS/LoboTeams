@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CApisService } from 'src/app/services/capis.service';
-import { respuestaAgregarUnirmeClase } from '../../interfaces/index';
+import { DetallesClase } from '../../interfaces/index';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -15,11 +15,14 @@ export class ClasesPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.SesionAbierta();
+      this.MisClasesCreadas();
     }, 500);
 
     return;
 
   }
+
+  ClasesCreadasU : DetallesClase[] = [];
 
   async SesionAbierta(){
 
@@ -48,6 +51,7 @@ export class ClasesPage implements OnInit {
 
         // console.log(response.Nombre);
         // console.log(response.clase.code);
+        this.MisClasesCreadas()
 
         this.AlertaExito(response.Nombre, response.clase.code);
 
@@ -194,6 +198,23 @@ export class ClasesPage implements OnInit {
 
     });
     await Al.present();
+  }
+
+  async MisClasesCreadas(){
+    var token = await this.cliente.obtenerToken();
+
+    this.cliente.PostVerMisClasesCreadas(token).subscribe(
+      response => {
+        this.ClasesCreadasU = response.Clases
+        console.log(this.ClasesCreadasU)
+        
+      },
+      error =>{
+        console.error("error cargar clases");
+        console.log(error)
+      }
+    )
+    return;
   }
 
 }
