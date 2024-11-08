@@ -1,13 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+    </ion-buttons>
     <ion-title>Clase</ion-title>
+    <p slot="end">Codigo clase</p>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Clase</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h2>Nombre de la clase</h2>
+  <h4>Profe que la imparte</h4>
+  <h3>Descripción</h3>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus porro ea consequuntur quod nesciunt praesentium unde in, laboriosam esse officia excepturi, adipisci hic distinctio dignissimos, dolorem recusandae ex animi quis?</p>
+  <h3>Lista de Actividades</h3>
 </ion-content>

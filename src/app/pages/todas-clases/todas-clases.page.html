@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Clases Existentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    <h3>Todas las Clases Existentes</h3>
+
+    <ion-item *ngFor="let i of TodasClasesExistentes" routerLink="/clase">
+      <ion-label>{{i.clase.name}}</ion-label>
+      <ion-label slot="end">{{i.clase.code}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

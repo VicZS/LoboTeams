@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -85,6 +85,14 @@ export class CApisService {
     }
 
     return this.http.post<respuestaMisClasesCreadas>('https://loboteam.aftermatch.website/api/viewmyclass',misClases)
+  }
+
+  PostObtenerTodasLasClases(token:string){
+    var misClases = {
+      "token": token
+    }
+
+    return this.http.post<DetallesClase[]>('https://loboteam.aftermatch.website/api/everyclass',misClases)
   }
 
   async GuardarToken(token:string){
