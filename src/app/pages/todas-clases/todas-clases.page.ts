@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetallesClase, InfoClase, respuestaMisClasesCreadas } from '../../interfaces/index';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-todas-clases',
@@ -9,7 +10,7 @@ import { DetallesClase, InfoClase, respuestaMisClasesCreadas } from '../../inter
 })
 export class TodasClasesPage implements OnInit {
 
-  constructor(private cliente:CApisService) { }
+  constructor(private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit() {
 
@@ -53,6 +54,84 @@ export class TodasClasesPage implements OnInit {
       }
     )
     return;
+  }
+
+  async AlertaUnirseClase(){
+    const Al= await this.alert.create({
+      header:"Unirse a una Clase",
+      message: "Formularion para unirse a una clase",
+      inputs:[{
+        name:"codigo",
+        id:"codigoClase",
+        placeholder: "Codigo de la clase",
+        type:"text"
+      }],
+      buttons: [{
+        text:'Cerrar', 
+        role:'cancel',
+        cssClass:'secondary',
+        handler: ()=>{
+          console.log("cancelado")
+        }
+      },{
+        text:'Aceptar',
+        handler: (data:any)=>{
+          console.log(data.codigo);
+          
+          this.unirseClase(data.codigo)
+
+          console.log(data)
+        }
+      }]
+
+    });
+    await Al.present();
+  }
+
+  async unirseClase(codigoClase:string){
+    this.SesionAbierta();
+    console.log('se unira a una clase');
+
+    var token = await this.cliente.obtenerToken();
+
+    this.cliente.PostUnirmeClase(token, codigoClase).subscribe(
+      response => {
+
+        console.log(response.message)
+
+        if(response.message == "Ya estás inscrito en esta clase"){
+          this.AlertaErrorUnirse(response.message);
+        }else{
+          console.log("Te has unido correctamente");
+          this.AlertaExitoUnirse();
+        }
+      },
+      error =>{
+        console.error("error no se logro unir a la clase problema servidor");
+
+        this.AlertaErrorUnirse("error no se logro unir a la clase problema servidor");
+      }
+    )
+    return;
+  }
+
+  async AlertaExitoUnirse(){
+
+    const Al= await this.alert.create({
+      header:"Agregado a la Clase Exitosamente!!!",
+      message: "Te has unido correctamente a la clase",
+      buttons: ['Cerrar']
+    });
+    await Al.present();
+  }
+
+  async AlertaErrorUnirse(mensaje:string){
+    const Al= await this.alert.create({
+      header:"Error",
+      message: mensaje,
+      buttons: ['Cerrar']
+    });
+    await Al.present();
   }
 
 }

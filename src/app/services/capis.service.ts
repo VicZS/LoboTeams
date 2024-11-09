@@ -87,6 +87,13 @@ export class CApisService {
     return this.http.post<respuestaMisClasesCreadas>('https://loboteam.aftermatch.website/api/viewmyclass',misClases)
   }
 
+  PostVerMisClasesInscritas(token:string){
+    var misClases = {
+      "token": token
+    }
+    return this.http.post<respuestaMisClasesCreadas>('https://loboteam.aftermatch.website/api/students-misclases',misClases)
+  }
+
   PostObtenerTodasLasClases(token:string){
     var misClases = {
       "token": token

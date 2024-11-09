@@ -2,12 +2,21 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button>
+
     </ion-buttons>
     <ion-title>Clases Existentes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-toolbar>
+    <ion-button (click)="AlertaUnirseClase()" fill="clear" >
+      Unirse a una Clase
+      <ion-icon  size="large" name="log-in"></ion-icon>
+    </ion-button> 
+  </ion-toolbar>
+
   <ion-list>
     <h3>Todas las Clases Existentes</h3>
 

@@ -34,6 +34,7 @@ export interface respuestaAgregarUnirmeClase{
 
 export interface respuestaCrearClase{
     message:string;
+
     clase:{
         name:string;
         descripcion:string;
@@ -43,6 +44,7 @@ export interface respuestaCrearClase{
         created_at: string;
         id: number;
     };
+
     Docente:string;
     Nombre:string;
 }
@@ -71,3 +73,4 @@ export interface InfoClase{
     created_at: string;
     updated_at: string;
 }
+

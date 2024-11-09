@@ -15,14 +15,14 @@ export class ClasesPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.SesionAbierta();
-      this.MisClasesCreadas();
+      this.MisClasesInscritas();
     }, 500);
 
     return;
 
   }
 
-  ClasesCreadasU : DetallesClase[] = [];
+  ClasesInscritas : DetallesClase[] = [];
 
   async SesionAbierta(){
 
@@ -38,33 +38,6 @@ export class ClasesPage implements OnInit {
 
   }
 
-  async crearClase(nombreClase:string, descripcionClase:string){
-    this.SesionAbierta();
-    console.log('se creara una clase');
-
-    var token = await this.cliente.obtenerToken();
-
-    this.cliente.PostCrearClase(token, nombreClase, descripcionClase).subscribe(
-      response => {
-
-        console.log("clase creada correctamente");
-
-        // console.log(response.Nombre);
-        // console.log(response.clase.code);
-        this.MisClasesCreadas()
-
-        this.AlertaExito(response.Nombre, response.clase.code);
-
-      },
-      error =>{
-        console.error("error no se logro crear la clase");
-
-        this.AlertaError();
-      }
-    )
-    return;
-  }
-
   async unirseClase(codigoClase:string){
     this.SesionAbierta();
     console.log('se unira a una clase');
@@ -77,7 +50,7 @@ export class ClasesPage implements OnInit {
         console.log(response.message)
 
         if(response.message == "Ya estás inscrito en esta clase"){
-          this.AlertaErrorUnirse();
+          this.AlertaErrorUnirse(response.message);
         }else{
           console.log("Te has unido correctamente");
           this.AlertaExitoUnirse();
@@ -86,67 +59,10 @@ export class ClasesPage implements OnInit {
       error =>{
         console.error("error no se logro unir a la clase problema servidor");
 
-        this.AlertaErrorUnirse();
+        this.AlertaErrorUnirse("error no se logro unir a la clase problema servidor");
       }
     )
     return;
-  }
-
-  async AlertaExito(nombreClase:string, codigoClase:string){
-
-    const Al= await this.alert.create({
-      header:"Clase Creada Exitosamente!!!",
-      message: "La clase "+nombreClase+" se creo exitosamente.\n Codigo de la clase: "+codigoClase,
-      buttons: ['Cerrar']
-    });
-    await Al.present();
-  }
-
-  async AlertaError(){
-    const Al= await this.alert.create({
-      header:"Error",
-      message: "Clase repetida o error del servicio, intente de nuevo.",
-      buttons: ['Cerrar']
-    });
-    await Al.present();
-  }
-
-  async AlertaCrearClase(){
-    const Al= await this.alert.create({
-      header:"Crear Clase",
-      message: "Formularion para crear una clase",
-      inputs:[{
-        name:"nombre",
-        id:"nombreClase",
-        placeholder: "Nombre de la clase",
-        type:"text"
-      },{
-        name:"descripcion",
-        id:"descripcionClase",
-        placeholder: "Descripcion de la clase",
-        type:"text"
-      }],
-      buttons: [{
-        text:'Cerrar', 
-        role:'cancel',
-        cssClass:'secondary',
-        handler: ()=>{
-          console.log("cancelado")
-        }
-      },{
-        text:'Aceptar',
-        handler: (data:any)=>{
-          console.log(data.nombre);
-          console.log(data.descripcion);
-          
-          this.crearClase(data.nombre, data.descripcion)
-
-          console.log(data)
-        }
-      }]
-
-    });
-    await Al.present();
   }
 
   async AlertaExitoUnirse(){
@@ -159,10 +75,10 @@ export class ClasesPage implements OnInit {
     await Al.present();
   }
 
-  async AlertaErrorUnirse(){
+  async AlertaErrorUnirse(mensaje:string){
     const Al= await this.alert.create({
       header:"Error",
-      message: "Ya estas unido a la clase o error del servicio, intente de nuevo.",
+      message: mensaje,
       buttons: ['Cerrar']
     });
     await Al.present();
@@ -200,14 +116,14 @@ export class ClasesPage implements OnInit {
     await Al.present();
   }
 
-  async MisClasesCreadas(){
+  async MisClasesInscritas(){
     var token = await this.cliente.obtenerToken();
 
-    this.cliente.PostVerMisClasesCreadas(token).subscribe(
+    this.cliente.PostVerMisClasesInscritas(token).subscribe(
       response => {
-        this.ClasesCreadasU = response.Clases
+        this.ClasesInscritas = response.Clases
 
-        console.log(this.ClasesCreadasU)
+        console.log(this.ClasesInscritas)
         
       },
       error =>{
@@ -215,7 +131,8 @@ export class ClasesPage implements OnInit {
         console.log(error)
       }
     )
-    return;
   }
+
+  
 
 }
