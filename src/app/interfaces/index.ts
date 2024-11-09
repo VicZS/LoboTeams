@@ -61,12 +61,13 @@ export interface DetallesClase {
     clase: InfoClase;
 }
 
-export interface InfoClase {
+export interface InfoClase{
     id: number;
     name: string;
     descripcion: string;
     icono: string;
     code: string;
+    docente?: string;
     created_at: string;
     updated_at: string;
 }

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/home" text="Regresar"></ion-back-button> -->
+
+      <ion-button (click)="regresar()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-label>Regresar</ion-label>
+      </ion-button>
+
+    </ion-buttons>
+
+    <ion-title>Clase</ion-title>
+    <p slot="end"> {{clase.code}} </p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h2> {{clase.name}} </h2>
+  <h4>Profe que la imparte: {{clase.docente}} </h4>
+  <h3>Descripción</h3>
+  <p> {{clase.descripcion}} </p>
+  <!-- <h3>Lista de Actividades</h3> -->
+</ion-content>

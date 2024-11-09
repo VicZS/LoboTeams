@@ -206,6 +206,7 @@ export class ClasesPage implements OnInit {
     this.cliente.PostVerMisClasesCreadas(token).subscribe(
       response => {
         this.ClasesCreadasU = response.Clases
+
         console.log(this.ClasesCreadasU)
         
       },
