@@ -14,6 +14,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-toolbar>
+    <ion-button (click)="AlertaCrearAsignacion(clase.id)" fill="clear">
+      <ion-icon slot="start" size="large" name="add-circle-outline"></ion-icon>
+      Crear Asignacion
+    </ion-button>
+  </ion-toolbar>
+
   <h2> {{clase.name}} </h2>
   <h4>Profe que la imparte: {{clase.docente}} </h4>
   <h3>Descripción</h3>

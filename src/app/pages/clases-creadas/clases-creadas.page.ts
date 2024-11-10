@@ -18,8 +18,6 @@ export class ClasesCreadasPage implements OnInit {
       this.MisClasesCreadas();
     }, 500);
 
-    return;
-
   }
 
   ClasesCreadasU : DetallesClase[] = [];

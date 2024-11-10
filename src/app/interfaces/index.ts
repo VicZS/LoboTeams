@@ -74,3 +74,17 @@ export interface InfoClase{
     updated_at: string;
 }
 
+export interface respuestaCreacionAsignacion {
+    message: string;
+    Asignacion: AsignacionCreada;
+}
+
+export interface AsignacionCreada {
+    id: number;
+    name: string;
+    descripcion: string;
+    date: string;
+    time: string;
+    created_at: string;
+    updated_at: string;
+}

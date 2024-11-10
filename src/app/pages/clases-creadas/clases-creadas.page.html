@@ -20,12 +20,7 @@
   <ion-list class="ion-padding-horizontal">
     <h3>Mis Clases Creadas</h3>
 
-    <app-clase [ListaDeClases] = "ClasesCreadasU"></app-clase>
-
-    <!-- <ion-item *ngFor="let i of ClasesCreadasU" routerLink="/clase">
-      <ion-label>{{i.clase.name}}</ion-label>
-      <ion-label slot="end">{{i.clase.code}}</ion-label>
-    </ion-item> -->
+    <app-clase-creada [ListaDeClases] = "ClasesCreadasU"> </app-clase-creada>
 
   </ion-list>
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -100,6 +100,19 @@ export class CApisService {
     }
 
     return this.http.post<DetallesClase[]>('https://loboteam.aftermatch.website/api/everyclass',misClases)
+  }
+
+  PostCrearAsignacion(token:string, nombre:string, descripcion:string, fecha:string, time:string, idClase:number){
+    var asignacion = {
+      "token": token,
+      "name": nombre,
+      "descripcion": descripcion,
+      "date": fecha,
+      "time": time,
+      "clase_id":idClase
+    }
+
+    return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
   }
 
   async GuardarToken(token:string){
