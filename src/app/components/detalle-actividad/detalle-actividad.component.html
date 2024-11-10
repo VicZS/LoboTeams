@@ -17,10 +17,15 @@
   <h3>Instrucciones:</h3>
   <h4>Aqui van las instrucciones</h4>
 
-  <ion-button (click)="entregarActividad()" fill="clear" *ngIf=!entregado>
-    <ion-icon slot="icon-only" name="add-circle-outline" size="large"></ion-icon>
-    <label>Entregar Actvidad</label>
-  </ion-button>
+  <form *ngIf=!entregado>
+    <input id="file-input" type="file" (change)="cargarArchivo($event)">
+
+    <ion-button (click)="entregarActividad()" fill="clear">
+      <ion-icon slot="icon-only" name="add-circle-outline" size="large"></ion-icon>
+      <label>Entregar Actvidad</label>
+    </ion-button>
+
+  </form>
 
   <h3 *ngIf=entregado >Actividad entregada: </h3>
   <h4 *ngIf=entregado >link de la actividad entregada</h4>

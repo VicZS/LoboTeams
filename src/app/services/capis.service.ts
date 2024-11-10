@@ -115,6 +115,25 @@ export class CApisService {
     return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
   }
 
+  // PostEntregarAsignacion(token:string, archivo:File ,idAsignacion:number){
+  //   var asignacion = {
+  //     "token": token,
+  //     "archivo": archivo,
+  //     "asignacion_id":idAsignacion
+  //   }
+
+  //   return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
+  // }
+
+  PostEntregarAsignacion(token: string, archivo: any, idAsignacion: number) {
+    const formData = new FormData();
+    formData.append('token', token);
+    formData.append('archivo', archivo);
+    formData.append('asignacion_id', idAsignacion.toString());
+
+    return this.http.post('https://loboteam.aftermatch.website/api/entrega', formData);
+  }
+
   async GuardarToken(token:string){
     await this._storage?.set('token',token);
     return;
