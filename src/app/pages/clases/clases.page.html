@@ -21,24 +21,11 @@
   <ion-list class="ion-padding-horizontal">
     <h3>Mis Clases Inscritas</h3>
 
-    <app-clase [ListaDeClases] = "ClasesInscritas"></app-clase>
+    <!-- <app-clase [ListaDeClases] = "ClasesInscritas"></app-clase> -->
 
-    <!-- <ion-item *ngFor="let i of ClasesCreadasU" routerLink="/clase">
-      <ion-label>{{i.clase.name}}</ion-label>
-      <ion-label slot="end">{{i.clase.code}}</ion-label>
-    </ion-item> -->
+    <app-clase-inscrita [ListaDeClases] = "ClasesInscritas"></app-clase-inscrita>
+
 
   </ion-list>
-
-  <!-- <ion-list class="ion-padding-horizontal" >
-    <h3>Mis Clases Inscritas</h3>
-
-    <ion-item *ngFor="let i of ClasesInscritas" routerLink="/clase">
-      <ion-label>{{i.clase.name}}</ion-label>
-      <ion-label slot="end">{{i.clase.code}}</ion-label>
-    </ion-item>
-
-  </ion-list> -->
-
 
 </ion-content>
