@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { InfoClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
+import { DetalleActividadComponent } from '../detalle-actividad/detalle-actividad.component';
 
 @Component({
   selector: 'app-detalle-clase-inscrita',
@@ -69,26 +70,23 @@ export class DetalleClaseInscritaComponent  implements OnInit {
   //   await AlertaMostrarA.present();
   // }
 
-  async MostrarActividad(entregada:boolean){
-    if(entregada){
-      //this.AlertaMostrarActividadEntregada();
-      return;
-    }else{
-      //this.AlertaMostrarActividad();
-    }
-  }
-
-  // async verDestalles(entregada:boolean){
-    
-  //   const modal = await this.modalCtr.create({
-  //     component: DetalleClaseInscritaComponent,
-  //     componentProps:{
-  //       clase
-  //     }
-  //   });
-
-  //   modal.present();
+  // async MostrarActividad(entregada:boolean){
+  //   if(entregada){
+  //     //this.AlertaMostrarActividadEntregada();
+  //     return;
+  //   }else{
+  //     //this.AlertaMostrarActividad();
+  //   }
   // }
+
+  async MostrarDetallesActividad(){
+    
+    const modal = await this.modalCtr.create({
+      component: DetalleActividadComponent
+    });
+
+    modal.present();
+  }
 
   // async AlertaCrearAsignacion(){
   //   const Al= await this.alert.create({

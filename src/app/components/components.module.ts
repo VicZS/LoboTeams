@@ -7,6 +7,7 @@ import { DetalleClaseCreadaComponent } from './detalle-clase-creada/detalle-clas
 import { ClaseCreadaComponent } from './clase-creada/clase-creada.component';
 import { ClaseInscritaComponent } from './clase-inscrita/clase-inscrita.component';
 import { DetalleClaseInscritaComponent } from './detalle-clase-inscrita/detalle-clase-inscrita.component';
+import { DetalleActividadComponent } from './detalle-actividad/detalle-actividad.component';
 
 
 
@@ -17,7 +18,8 @@ import { DetalleClaseInscritaComponent } from './detalle-clase-inscrita/detalle-
     ClaseCreadaComponent, 
     DetalleClaseCreadaComponent,
     ClaseInscritaComponent,
-    DetalleClaseInscritaComponent
+    DetalleClaseInscritaComponent,
+    DetalleActividadComponent
   ],
   imports: [
     CommonModule,IonicModule
@@ -28,7 +30,8 @@ import { DetalleClaseInscritaComponent } from './detalle-clase-inscrita/detalle-
     DetalleClaseCreadaComponent, 
     ClaseCreadaComponent,
     ClaseInscritaComponent,
-    DetalleClaseInscritaComponent
+    DetalleClaseInscritaComponent,
+    DetalleActividadComponent
   ]
 })
 export class ComponentsModule { }
