@@ -53,6 +53,7 @@ export class ClasesPage implements OnInit {
           this.AlertaErrorUnirse(response.message);
         }else{
           console.log("Te has unido correctamente");
+          this.MisClasesInscritas()
           this.AlertaExitoUnirse();
         }
       },

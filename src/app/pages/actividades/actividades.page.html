@@ -6,10 +6,6 @@
 
     <ion-title>Actividades</ion-title>
 
-    <ion-button (click)="addActividad()" fill="clear" slot="end">
-      <ion-icon  size="large" name="add-circle-outline"></ion-icon>
-    </ion-button>
-
   </ion-toolbar>
 </ion-header>
 
@@ -18,14 +14,21 @@
   <ion-list>
     <h2 class="ion-padding-start">Actividades</h2>
 
-    <ion-item *ngFor="let i of actividades" routerLink="/actividad">
+    <!-- <ion-item *ngFor="let i of actividades" routerLink="/actividad">
 
       <ion-button [id]="i.id" expand="block" fill="clear" shape="round" size="large">
         <ion-icon slot="start" name="journal"></ion-icon>
         <h3>{{i.title}} </h3>
       </ion-button>
 
-    </ion-item>
+    </ion-item> -->
+
+    <ion-list>
+      <ion-item (click)="MostrarDetallesActividad()">
+        <ion-icon slot="start" name="journal"></ion-icon>
+        <ion-label>Actividad</ion-label>
+      </ion-item>
+    </ion-list>
 
   </ion-list>
 

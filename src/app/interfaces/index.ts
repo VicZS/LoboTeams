@@ -88,3 +88,40 @@ export interface AsignacionCreada {
     created_at: string;
     updated_at: string;
 }
+
+////////////////////////////////////////
+
+export interface RespuestaAsignacionClase {
+    message: string;
+    Clases: ClaseAsignacion[];
+}
+
+export interface ClaseAsignacion {
+    id: number;
+    clase_id: number;
+    asignacione_id: number;
+    created_at: string;
+    updated_at: string;
+    asignacione: Asignacion;
+}
+
+export interface Asignacion {
+    id: number;
+    name: string;
+    descripcion: string;
+    date: string;
+    time: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface RespuestaActividadEntregada{
+    message:string;
+    entregaInfo:ArchivoInfo;
+}
+
+export interface ArchivoInfo{
+    id:number;
+    archivo:string;
+    created_at:string;
+}

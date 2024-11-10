@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioActividad, Actividad } from '../../interfaces/index';
 import { CApisService } from 'src/app/services/capis.service';
+import { DetalleActividadComponent } from 'src/app/components/detalle-actividad/detalle-actividad.component';
+import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-actividades',
@@ -9,7 +11,7 @@ import { CApisService } from 'src/app/services/capis.service';
 })
 export class ActividadesPage implements OnInit {
 
-  constructor(private cliente:CApisService) { }
+  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit(){
     setTimeout(() => {
@@ -67,6 +69,15 @@ export class ActividadesPage implements OnInit {
       window.location.href = "/";
     }
 
+  }
+
+  async MostrarDetallesActividad(){
+    
+    const modal = await this.modalCtr.create({
+      component: DetalleActividadComponent
+    });
+
+    modal.present();
   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -115,16 +115,6 @@ export class CApisService {
     return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
   }
 
-  // PostEntregarAsignacion(token:string, archivo:File ,idAsignacion:number){
-  //   var asignacion = {
-  //     "token": token,
-  //     "archivo": archivo,
-  //     "asignacion_id":idAsignacion
-  //   }
-
-  //   return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
-  // }
-
   PostEntregarAsignacion(token: string, archivo: any, idAsignacion: number) {
     const formData = new FormData();
     formData.append('token', token);
@@ -132,6 +122,26 @@ export class CApisService {
     formData.append('asignacion_id', idAsignacion.toString());
 
     return this.http.post('https://loboteam.aftermatch.website/api/entrega', formData);
+  }
+
+  PostAsignacionesClase(token:string, idClase:number){
+    var verAsignacionesClase = {
+      "token": token,
+      "clase_id": idClase
+    }
+
+    return this.http.post<RespuestaAsignacionClase>('https://loboteam.aftermatch.website/api/asignaciones-clase',verAsignacionesClase)
+
+  }
+
+  PostVerificarEntrega(token:string, idAsignacion:number){
+    var verAsignacionesClase = {
+      "token": token,
+      "asignacion_id": idAsignacion
+    }
+
+    return this.http.post<RespuestaActividadEntregada>('https://loboteam.aftermatch.website/api/entrega-condicion',verAsignacionesClase)
+
   }
 
   async GuardarToken(token:string){

@@ -13,9 +13,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Nombre Actividad</h1>
+  <h1> {{actividad.name}} </h1>
+  <p>Fecha limite de entrega: {{actividad.date}} </p>
+  <p>Hora limite de entrega: {{actividad.time}} </p>
   <h3>Instrucciones:</h3>
-  <h4>Aqui van las instrucciones</h4>
+  <h4> {{actividad.descripcion}} </h4>
 
   <form *ngIf=!entregado>
     <input id="file-input" type="file" (change)="cargarArchivo($event)">
@@ -28,6 +30,9 @@
   </form>
 
   <h3 *ngIf=entregado >Actividad entregada: </h3>
-  <h4 *ngIf=entregado >link de la actividad entregada</h4>
+  <ion-button *ngIf=entregado (click)="abrirArchivoEntregado()">
+    <ion-icon slot="icon-only" name="document" slot="start"></ion-icon>
+    <label>Ver Actividad Entregada</label>
+  </ion-button>
 
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { InfoClase } from 'src/app/interfaces';
+import { Asignacion, ClaseAsignacion, InfoClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetalleActividadComponent } from '../detalle-actividad/detalle-actividad.component';
 
@@ -16,6 +16,7 @@ export class DetalleClaseInscritaComponent  implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.SesionAbierta();
+      this.obtenerTodasActividadesClase(this.clase);
      // this.MisClasesCreadas();
     }, 500);
 
@@ -52,127 +53,40 @@ export class DetalleClaseInscritaComponent  implements OnInit {
     docente:'Sin docente'
   };
 
-  // async AlertaMostrarActividad(){
-  //   const AlertaMostrarA = await this.alert.create({
-  //     header:"Tituo de la Actividad",
-  //     message: "Detalles de la Actividad. \n Fecha Limite: 11-11-2024 \n Hora: 11:11 \n ",
-  //   })
-  //   await AlertaMostrarA.present();
-  // }
+  ActividadesClase: ClaseAsignacion[] = [];
+  
 
-  // async AlertaMostrarActividadEntregada(){
-  //   const AlertaMostrarA = await this.alert.create({
-  //     header:"Titulo de la Actividad",
-  //     subHeader: "Detalles de la Actividad. Fecha Limite: 11-11-2024 Hora Limite: 11:11",
-  //     message:"Actividad Entregada: link"
-  //   })
-
-  //   await AlertaMostrarA.present();
-  // }
-
-  // async MostrarActividad(entregada:boolean){
-  //   if(entregada){
-  //     //this.AlertaMostrarActividadEntregada();
-  //     return;
-  //   }else{
-  //     //this.AlertaMostrarActividad();
-  //   }
-  // }
-
-  async MostrarDetallesActividad(){
+  async MostrarDetallesActividad(actividad:Asignacion){
     
     const modal = await this.modalCtr.create({
-      component: DetalleActividadComponent
+      component: DetalleActividadComponent,
+      componentProps:{
+        actividad
+      }
     });
 
     modal.present();
   }
 
-  // async AlertaCrearAsignacion(){
-  //   const Al= await this.alert.create({
-  //     header:"Titulo de la Actividad",
-  //     message: "Detalles de la Actividad. \n Fecha Limite: 11-11-2024 \n Hora: 11:11 \n Entregas",
-  //     inputs:[{
-  //       name:"nombre",
-  //       id:"nombreAsignacion",
-  //       placeholder: "Nombre de la Asignacion",
-  //       type:"text"
-  //     },{
-  //       name:"descripcion",
-  //       id:"descripcionAsignacion",
-  //       placeholder: "Descripcion de la Asignacion",
-  //       type:"text"
-  //     },{
-  //       name:"date",
-  //       id:"dateAsignacion",
-  //       placeholder: "Fecha de entrega",
-  //       type:"date"
-  //     },{
-  //       name:"time",
-  //       id:"timeAsignacion",
-  //       placeholder: "Hora de entrega",
-  //       type:"time"
-  //     }],
-  //     buttons: [{
-  //       text:'Cerrar', 
-  //       role:'cancel',
-  //       cssClass:'secondary',
-  //       handler: ()=>{
-  //         console.log("cancelado")
-  //       }
-  //     },{
-  //       text:'Aceptar',
-  //       handler: (data:any)=>{
+  async obtenerTodasActividadesClase(clase:InfoClase){
+    console.log("Se obtendran todas las actividades de la clase: " + clase.id);
 
-  //         if (!data.nombre || !data.descripcion || !data.date || !data.time ) {
-  //           console.log("Todos los campos son obligatorios.");
-  //           this.Alerta("Error", "Todos los campos son obligatorios.");
-  //           console.log(data)
-  //         }else{
-  //           console.log(data)
-  //           //this.crearAsignacion(idClase, data.nombre, data.descripcion, data.date, data.time)
-  //         }
-  //       }
-  //     }]
+    var token = await this.cliente.obtenerToken();
+    var idClase = clase.id;
 
-  //   });
-  //   await Al.present();
-  // }
+    this.cliente.PostAsignacionesClase(token, idClase).subscribe(
+      response => {
 
-  // async crearAsignacion(idClase:number, nombreAsignacion:string, descripcionAsignacion:string, fecha:string, time:string ){
-  //   this.SesionAbierta();
-  //   console.log('Se creara una Asignacion');
-
-  //   var token = await this.cliente.obtenerToken();
-
-  //   this.cliente.PostCrearAsignacion(token, nombreAsignacion, descripcionAsignacion, fecha, time, idClase).subscribe(
-  //     response => {
-
-  //       console.log("Asignacion creada correctamente");
-  //       //this.MisClasesCreadas()
-
-  //       console.log(response);
-
-  //       this.Alerta("Asignacion Creada!!!", "Asignacion creada correctamente");
-
-  //     },
-  //     error =>{
-  //       console.error("error no se logro crear la Asignacion");
-
-  //       this.Alerta("Error","error no se logro crear la Asignacion");
-  //     }
-  //   )
-  //   return;
-  // }
-
-  // async Alerta(titulo:string, message:string){
-
-  //   const Al= await this.alert.create({
-  //     header: titulo,
-  //     message: message,
-  //     buttons: ['Cerrar']
-  //   });
-  //   await Al.present();
-  // }
+        console.log(response.Clases);
+        this.ActividadesClase = response.Clases;
+        console.log(this.ActividadesClase);
+        
+      },
+      error =>{
+        console.error("Error cargar las Actividades");
+        console.log(error)
+      }
+    )
+  }
 
 }

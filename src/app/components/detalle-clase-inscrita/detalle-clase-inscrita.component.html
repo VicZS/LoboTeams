@@ -22,9 +22,13 @@
   <h3>Actividades</h3>
   
   <ion-list>
-    <ion-item (click)="MostrarDetallesActividad()">
-      <ion-label>Actividad</ion-label>
+    <ion-item *ngFor="let Actividad of ActividadesClase" (click)="MostrarDetallesActividad(Actividad.asignacione)">
+      <ion-icon slot="start" name="journal"></ion-icon>
+      <ion-label> {{Actividad.asignacione.name}} </ion-label>
     </ion-item>
+
+    <ion-item *ngIf="ActividadesClase.length === 0 " >Sin Actividades por el momento</ion-item>
+
   </ion-list>
 
 </ion-content>
