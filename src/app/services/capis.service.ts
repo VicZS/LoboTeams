@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada, RespuestaObtenerDocente, RespuestaTodasMisAsignaciones } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -141,6 +141,25 @@ export class CApisService {
     }
 
     return this.http.post<RespuestaActividadEntregada>('https://loboteam.aftermatch.website/api/entrega-condicion',verAsignacionesClase)
+
+  }
+
+  PostObtenerNombreDocente(token:string, idClase:number){
+    var clase = {
+      "token": token,
+      "clase_id": idClase
+    }
+
+    return this.http.post<RespuestaObtenerDocente>('https://loboteam.aftermatch.website/api/obtener-docente',clase)
+
+  }
+
+  PostObtenerTodasMisActividadesAsignadas(token:string){
+    var TodasAsignaciones = {
+      "token": token,
+    }
+
+    return this.http.post<RespuestaTodasMisAsignaciones>('https://loboteam.aftermatch.website/api/mis-asignaciones',TodasAsignaciones)
 
   }
 

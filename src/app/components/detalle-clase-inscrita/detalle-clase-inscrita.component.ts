@@ -17,6 +17,7 @@ export class DetalleClaseInscritaComponent  implements OnInit {
     setTimeout(() => {
       this.SesionAbierta();
       this.obtenerTodasActividadesClase(this.clase);
+      this.obtenerNombreDocente(this.clase);
      // this.MisClasesCreadas();
     }, 500);
 
@@ -53,10 +54,14 @@ export class DetalleClaseInscritaComponent  implements OnInit {
     docente:'Sin docente'
   };
 
+  nombreDocente:string="";
+
   ActividadesClase: ClaseAsignacion[] = [];
   
 
   async MostrarDetallesActividad(actividad:Asignacion){
+
+    console.log(actividad);
     
     const modal = await this.modalCtr.create({
       component: DetalleActividadComponent,
@@ -84,6 +89,26 @@ export class DetalleClaseInscritaComponent  implements OnInit {
       },
       error =>{
         console.error("Error cargar las Actividades");
+        console.log(error)
+      }
+    )
+  }
+
+  async obtenerNombreDocente(clase:InfoClase){
+    console.log("Se obtendran el nombre del docente de la clase: " + clase.id);
+
+    var token = await this.cliente.obtenerToken();
+    var idClase = clase.id;
+
+    this.cliente.PostObtenerNombreDocente(token, idClase).subscribe(
+      response => {
+
+        //console.log(response.Docente);
+        this.nombreDocente = response.Docente[0].name;
+        
+      },
+      error =>{
+        console.error("Error al obtener el nombre");
         console.log(error)
       }
     )

@@ -14,20 +14,14 @@
   <ion-list>
     <h2 class="ion-padding-start">Actividades</h2>
 
-    <!-- <ion-item *ngFor="let i of actividades" routerLink="/actividad">
-
-      <ion-button [id]="i.id" expand="block" fill="clear" shape="round" size="large">
-        <ion-icon slot="start" name="journal"></ion-icon>
-        <h3>{{i.title}} </h3>
-      </ion-button>
-
-    </ion-item> -->
-
     <ion-list>
-      <ion-item (click)="MostrarDetallesActividad()">
+      <ion-item *ngFor="let Actividad of ActividadesClase" (click)="MostrarDetalle(Actividad)" >
         <ion-icon slot="start" name="journal"></ion-icon>
-        <ion-label>Actividad</ion-label>
+        <ion-label> {{Actividad.Nombre}} </ion-label>
       </ion-item>
+
+      <ion-item *ngIf="ActividadesClase.length === 0 " >Sin Actividades por el momento</ion-item>
+
     </ion-list>
 
   </ion-list>

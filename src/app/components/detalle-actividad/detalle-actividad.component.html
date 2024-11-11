@@ -15,7 +15,7 @@
 <ion-content class="ion-padding">
   <h1> {{actividad.name}} </h1>
   <p>Fecha limite de entrega: {{actividad.date}} </p>
-  <p>Hora limite de entrega: {{actividad.time}} </p>
+  <p *ngIf="actividad.time !== na " >Hora limite de entrega: {{actividad.time}} </p>
   <h3>Instrucciones:</h3>
   <h4> {{actividad.descripcion}} </h4>
 

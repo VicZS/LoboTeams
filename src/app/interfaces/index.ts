@@ -70,8 +70,8 @@ export interface InfoClase{
     icono: string;
     code: string;
     docente?: string;
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface respuestaCreacionAsignacion {
@@ -110,7 +110,7 @@ export interface Asignacion {
     name: string;
     descripcion: string;
     date: string;
-    time: string;
+    time?: string;
     created_at?: string;
     updated_at?: string;
 }
@@ -124,4 +124,33 @@ export interface ArchivoInfo{
     id:number;
     archivo:string;
     created_at:string;
+}
+
+export interface RespuestaObtenerDocente{
+    message:string;
+    Docente:nombreDocente[];
+}
+
+export interface nombreDocente{
+    name:string;
+}
+
+export interface RespuestaTodasMisAsignaciones{
+    message: string;
+    Clases: ClaseMisAsignaciones[];
+}
+
+export interface ClaseMisAsignaciones {
+    Asignacion_id: number;
+    Nombre: string;
+    Descripción: string;
+    Fecha: string;
+    Clase: ClaseMiAsignacion[];
+}
+
+export interface ClaseMiAsignacion {
+    id_clase: number;
+    Name: string;
+    Descripcion: string;
+    Code: string;
 }

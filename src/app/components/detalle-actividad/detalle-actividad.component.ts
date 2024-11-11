@@ -51,6 +51,8 @@ export class DetalleActividadComponent  implements OnInit {
     this.modalCtr.dismiss()
   }
 
+  na: string = "na";
+
   entregado: boolean = false;
   archivoSeleccionado: File | null = null;
   idAsignacion: number = 0;
