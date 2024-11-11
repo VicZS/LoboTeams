@@ -11,15 +11,20 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-datetime presentation="date" [highlightedDates]="highlightedDates" ></ion-datetime>
 
-  <h2>Actividades</h2>
+  <ion-list>
+    <h2 class="ion-padding-start">Actividades</h2>
 
-  <ion-list class="ion-padding-vertical">
-    
+    <ion-list>
+      <ion-item *ngFor="let Actividad of ActividadesClase" (click)="MostrarDetalle(Actividad)" >
+        <ion-icon slot="start" name="journal" color="secondary"></ion-icon>
+        <ion-label> {{Actividad.Nombre}} </ion-label>
+        <ion-label slot="end" > {{Actividad.Fecha}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-icon slot="start" name="journal"></ion-icon>
-      <ion-label>Awesome Label</ion-label>
-    </ion-item>
+      <ion-item *ngIf="ActividadesClase.length === 0 " >Sin Actividades por el momento</ion-item>
+
+    </ion-list>
 
   </ion-list>
+
 </ion-content>
