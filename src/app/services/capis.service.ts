@@ -112,6 +112,15 @@ export class CApisService {
       "clase_id":idClase
     }
 
+    // var asignacion = {
+    //   "token": "58|KIUfWdSd5jCHTp31E0x7ac7dYuMtMcpvHCxlldLq61c37da9",
+    //   "name": "prueba Actividad",
+    //   "descripcion": "descripcion prueba actividad",
+    //   "date": "2024-11-11",
+    //   "time": "11:11",
+    //   "clase_id": 20
+    // }
+
     return this.http.post('https://loboteam.aftermatch.website/api/asignacion',asignacion)
   }
 

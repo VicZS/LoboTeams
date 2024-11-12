@@ -76,10 +76,10 @@ export interface InfoClase{
 
 export interface respuestaCreacionAsignacion {
     message: string;
-    Asignacion: AsignacionCreada;
+    Asignacion: MiAsignacionCreada;
 }
 
-export interface AsignacionCreada {
+export interface MiAsignacionCreada {
     id: number;
     name: string;
     descripcion: string;

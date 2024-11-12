@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { InfoClase } from 'src/app/interfaces';
+import { ClaseAsignacion, InfoClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
@@ -32,6 +32,9 @@ export class DetalleClaseCreadaComponent  implements OnInit {
     console.log('Detalles de la clase: ', this.clase)
     return;
   }
+
+  
+  ActividadesClase: ClaseAsignacion[] = [];
 
   async SesionAbierta(){
 
@@ -121,6 +124,7 @@ export class DetalleClaseCreadaComponent  implements OnInit {
       },
       error =>{
         console.error("error no se logro crear la Asignacion");
+        console.log(error)
 
         this.Alerta("Error","error no se logro crear la Asignacion");
       }
@@ -136,6 +140,27 @@ export class DetalleClaseCreadaComponent  implements OnInit {
       buttons: ['Cerrar']
     });
     await Al.present();
+  }
+
+  async obtenerTodasActividadesClase(clase:InfoClase){
+    console.log("Se obtendran todas las actividades de la clase: " + clase.id);
+
+    var token = await this.cliente.obtenerToken();
+    var idClase = clase.id;
+
+    this.cliente.PostAsignacionesClase(token, idClase).subscribe(
+      response => {
+
+        console.log(response.Clases);
+        this.ActividadesClase = response.Clases;
+        console.log(this.ActividadesClase);
+        
+      },
+      error =>{
+        console.error("Error cargar las Actividades");
+        console.log(error)
+      }
+    )
   }
 
 }
