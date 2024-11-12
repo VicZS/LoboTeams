@@ -141,11 +141,17 @@ export class DetalleActividadComponent  implements OnInit {
         .subscribe(
           async response => {
             console.log("Respuesta obtenida:", response);
-            this.entregado = true;
+            //this.entregado = true;
             //this.archivoEntregado = 'https://loboteam.aftermatch.website/storage/'+response.entregaInfo.archivo;
-            this.archivoEntregado = response.entregaInfo.archivo;
+            //this.archivoEntregado = response.entregaInfo.archivo;
             //console.log(response.entregaInfo);
             //console.log(this.archivoEntregado)
+
+            if(response !== null){
+              this.entregado = true;
+              //this.archivoEntregado = 'https://loboteam.aftermatch.website/storage/'+response.entregaInfo.archivo;
+              this.archivoEntregado = response.entregaInfo.archivo;
+            }
 
           },
           async error => {

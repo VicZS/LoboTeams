@@ -120,7 +120,9 @@ export class CalendarioPage implements OnInit {
     console.log("Se obtendrán todas las actividades de las clases");
 
     const token = await this.cliente.obtenerToken();
-    const hoy = new Date().toISOString().split("T")[0];
+    const hoy = new Date().toLocaleDateString("en-CA"); // Formato 'YYYY-MM-DD'
+    console.log(hoy);
+
 
     this.cliente.PostObtenerTodasMisActividadesAsignadas(token).subscribe(
         response => {
