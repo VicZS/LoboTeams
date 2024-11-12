@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Asignacion, RespuestaAsignacionesEntregadasDeMiClaseCreada } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 import { InfoEstudianteEntrega } from '../../interfaces/index';
@@ -11,9 +11,10 @@ import { InfoEstudianteEntrega } from '../../interfaces/index';
 })
 export class DetalleActividadCreadaComponent  implements OnInit {
 
-  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { };
+  constructor(private loadCtr:LoadingController, private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { };
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       console.log('Detalles de la actividad: ', this.actividad)
       this.SesionAbierta();
@@ -21,6 +22,15 @@ export class DetalleActividadCreadaComponent  implements OnInit {
     }, 500);
 
     return;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   entregasEstudiantes: RespuestaAsignacionesEntregadasDeMiClaseCreada[] = [];

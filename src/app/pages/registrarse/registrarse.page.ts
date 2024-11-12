@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { CApisService } from 'src/app/services/capis.service';
 export class RegistrarsePage implements OnInit {
 
   constructor(private cliente:CApisService,
-    private alert: AlertController
+    private alert: AlertController,
+    private loadCtr:LoadingController
   ) { }
 
   ngOnInit() {
@@ -18,6 +19,15 @@ export class RegistrarsePage implements OnInit {
       this.SesionAbierta();
     }, 500);
     return;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   Usuario = {
@@ -30,6 +40,7 @@ export class RegistrarsePage implements OnInit {
 
   onSubmit(){
     this.SesionAbierta();
+    this.presentLoading();
     
     if(this.Usuario.password == this.Usuario.confirmpassword){
 

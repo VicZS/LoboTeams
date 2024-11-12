@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetallesClase } from '../../interfaces/index';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-clases',
@@ -10,9 +10,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class ClasesPage implements OnInit {
 
-  constructor(private cliente:CApisService, private alert: AlertController) { }
+  constructor(private loadCtr:LoadingController, private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       this.SesionAbierta();
       this.MisClasesInscritas();
@@ -20,6 +21,15 @@ export class ClasesPage implements OnInit {
 
     return;
 
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   ClasesInscritas : DetallesClase[] = [];

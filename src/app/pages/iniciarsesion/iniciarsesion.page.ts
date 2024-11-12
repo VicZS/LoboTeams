@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CApisService } from '../../services/capis.service';
 import { LoginResponse } from '../../interfaces';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-iniciarsesion',
@@ -11,7 +11,8 @@ import { AlertController } from '@ionic/angular';
 export class IniciarsesionPage implements OnInit {
 
   constructor( private cliente: CApisService, 
-               private alert: AlertController
+               private alert: AlertController,
+               private loadCtr:LoadingController
   ) { }
 
   ngOnInit() {
@@ -47,6 +48,7 @@ export class IniciarsesionPage implements OnInit {
     this.SesionAbierta();
     
     console.log(this.Usuario);
+    this.presentLoading();
 
     this.cliente.PostIniciarSesion(this.Usuario.email, this.Usuario.password).subscribe(
       response => {
@@ -91,6 +93,15 @@ export class IniciarsesionPage implements OnInit {
     if(SesionA){
       window.location.href = "/home";
     }
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
 }

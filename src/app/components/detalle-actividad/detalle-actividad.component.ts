@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { ArchivoInfo, Asignacion } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 
@@ -10,9 +10,10 @@ import { CApisService } from 'src/app/services/capis.service';
 })
 export class DetalleActividadComponent  implements OnInit {
 
-  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { };
+  constructor(private loadCtr:LoadingController, private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { };
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       console.log('Detalles de la actividad: ', this.actividad)
       this.idAsignacion=this.actividad.id;
@@ -23,6 +24,15 @@ export class DetalleActividadComponent  implements OnInit {
     }, 500);
 
     return;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   @Input() actividad : Asignacion={

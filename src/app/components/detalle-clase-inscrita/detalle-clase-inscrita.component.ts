@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Asignacion, ClaseAsignacion, InfoClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetalleActividadComponent } from '../detalle-actividad/detalle-actividad.component';
@@ -11,9 +11,10 @@ import { DetalleActividadComponent } from '../detalle-actividad/detalle-activida
 })
 export class DetalleClaseInscritaComponent  implements OnInit {
 
-  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { }
+  constructor(private loadCtr:LoadingController, private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       this.SesionAbierta();
       this.obtenerTodasActividadesClase(this.clase);
@@ -37,6 +38,15 @@ export class DetalleClaseInscritaComponent  implements OnInit {
       window.location.href = "/";
     }
 
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   regresar(){

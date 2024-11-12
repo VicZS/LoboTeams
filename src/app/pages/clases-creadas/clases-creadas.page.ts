@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { DetallesClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 
@@ -10,9 +10,10 @@ import { CApisService } from 'src/app/services/capis.service';
 })
 export class ClasesCreadasPage implements OnInit {
 
-  constructor(private cliente:CApisService, private alert: AlertController) { }
+  constructor(private loadCtr:LoadingController, private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       this.SesionAbierta();
       this.MisClasesCreadas();
@@ -34,6 +35,15 @@ export class ClasesCreadasPage implements OnInit {
       window.location.href = "/";
     }
 
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   async crearClase(nombreClase:string, descripcionClase:string){

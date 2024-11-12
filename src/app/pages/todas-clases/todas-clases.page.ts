@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetallesClase, InfoClase, respuestaMisClasesCreadas } from '../../interfaces/index';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-todas-clases',
@@ -10,16 +10,25 @@ import { AlertController } from '@ionic/angular';
 })
 export class TodasClasesPage implements OnInit {
 
-  constructor(private cliente:CApisService, private alert: AlertController) { }
+  constructor(private loadCtr:LoadingController, private cliente:CApisService, private alert: AlertController) { }
 
   ngOnInit() {
-
+    this.presentLoading();
     setTimeout(() => {
       this.SesionAbierta();
       this.ObtenerClasesExistentes();
     }, 500);
 
     return;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
   
   TodasClasesExistentes : DetallesClase[] = [];

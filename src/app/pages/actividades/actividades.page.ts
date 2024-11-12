@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioActividad, Actividad, ClaseMisAsignaciones, Asignacion } from '../../interfaces/index';
 import { CApisService } from 'src/app/services/capis.service';
 import { DetalleActividadComponent } from 'src/app/components/detalle-actividad/detalle-actividad.component';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { DetalleClaseInscritaComponent } from 'src/app/components/detalle-clase-inscrita/detalle-clase-inscrita.component';
 
 @Component({
@@ -12,9 +12,11 @@ import { DetalleClaseInscritaComponent } from 'src/app/components/detalle-clase-
 })
 export class ActividadesPage implements OnInit {
 
-  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { }
+  constructor(private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController, private loadCtr:LoadingController) { }
 
   ngOnInit(){
+    this.presentLoading();
+    
     setTimeout(() => {
       this.SesionAbierta();
       this.obtenerTodasActividadesDeTodasLasClases();
@@ -124,6 +126,15 @@ export class ActividadesPage implements OnInit {
       }
     });
     modal.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
 }

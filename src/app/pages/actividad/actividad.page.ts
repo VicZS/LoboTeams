@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Actividad, UsuarioActividad } from 'src/app/interfaces';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { CApisService } from 'src/app/services/capis.service';
 
 @Component({
@@ -10,13 +10,23 @@ import { CApisService } from 'src/app/services/capis.service';
 })
 export class ActividadPage implements OnInit {
 
-  constructor(private alert:AlertController, private cliente:CApisService) { }
+  constructor(private loadCtr:LoadingController, private alert:AlertController, private cliente:CApisService) { }
 
   ngOnInit() {
+    this.presentLoading();
     setTimeout(() => {
       this.SesionAbierta();
     }, 500);
     return;
+  }
+
+  async presentLoading() {
+    const loading = await this.loadCtr.create({
+      message: 'Cargando...',
+      duration: 1000,
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   usuarios : UsuarioActividad[] = [{
