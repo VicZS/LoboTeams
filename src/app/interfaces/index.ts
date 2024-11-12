@@ -154,3 +154,16 @@ export interface ClaseMiAsignacion {
     Descripcion: string;
     Code: string;
 }
+
+///////////////////////////////////////
+
+export interface RespuestaAsignacionesEntregadasDeMiClaseCreada {
+    student: InfoEstudianteEntrega;
+    archivo: string;
+}
+
+export interface InfoEstudianteEntrega{
+    id: number;
+    name: string;
+    email: string;
+}

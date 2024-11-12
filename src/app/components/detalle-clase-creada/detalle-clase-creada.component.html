@@ -27,7 +27,7 @@
   <h3>Actividades Creadas</h3>
   
   <ion-list>
-    <ion-item *ngFor="let Actividad of ActividadesClase" >
+    <ion-item *ngFor="let Actividad of ActividadesClase" (click)="MostrarDetallesActividad(Actividad.asignacione)">
       <ion-icon slot="start" name="journal"></ion-icon>
       <ion-label> {{Actividad.asignacione.name}} </ion-label>
     </ion-item>

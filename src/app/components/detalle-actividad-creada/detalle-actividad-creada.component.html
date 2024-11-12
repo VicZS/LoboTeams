@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-label>Regresar</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Actividad Creada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h1> {{actividad.name}} </h1>
+  <p>Fecha limite de entrega: {{actividad.date}} </p>
+  <p>Hora limite de entrega: {{actividad.time}} </p>
+  <h3>Instrucciones:</h3>
+  <h4> {{actividad.descripcion}} </h4>
+
+  <ion-list>
+    <h3>Entregas Recibidas</h3>
+
+    <ion-item *ngFor="let entrega of entregasEstudiantes">
+      <ion-list>
+        <ion-item (click)="mostrarNombre(entrega.student.name)">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-label>{{entrega.student.name}} </ion-label>
+        </ion-item>
+        <ion-item (click)="mostrarEmail(entrega.student.email)">
+          <ion-icon slot="start" name="mail" ></ion-icon>
+          <p>{{entrega.student.email}} </p>
+        </ion-item>
+      </ion-list>
+
+      <ion-button (click)="verEntrega(entrega.archivo)" fill="clear" shape="round" slot="end">
+        Ver Entrega
+      </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="entregasEstudiantes.length === 0 ">
+      <ion-label>No hay Entregas Recibidas</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

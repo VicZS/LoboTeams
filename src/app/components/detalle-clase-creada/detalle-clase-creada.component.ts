@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { ClaseAsignacion, InfoClase } from 'src/app/interfaces';
+import { Asignacion, ClaseAsignacion, InfoClase } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
+import { DetalleActividadComponent } from '../detalle-actividad/detalle-actividad.component';
+import { DetalleActividadCreadaComponent } from '../detalle-actividad-creada/detalle-actividad-creada.component';
 
 @Component({
   selector: 'app-detalle-clase-creada',
@@ -27,6 +29,7 @@ export class DetalleClaseCreadaComponent  implements OnInit {
     setTimeout(() => {
       this.SesionAbierta();
      // this.MisClasesCreadas();
+     this.obtenerTodasActividadesClase(this.clase)
     }, 500);
 
     console.log('Detalles de la clase: ', this.clase)
@@ -161,6 +164,20 @@ export class DetalleClaseCreadaComponent  implements OnInit {
         console.log(error)
       }
     )
+  }
+
+  async MostrarDetallesActividad(actividad:Asignacion){
+
+    console.log(actividad);
+    
+    const modal = await this.modalCtr.create({
+      component: DetalleActividadCreadaComponent,
+      componentProps:{
+        actividad
+      }
+    });
+
+    modal.present();
   }
 
 }
