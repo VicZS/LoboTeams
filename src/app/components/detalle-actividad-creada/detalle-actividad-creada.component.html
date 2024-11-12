@@ -25,11 +25,11 @@
     <ion-item *ngFor="let entrega of entregasEstudiantes">
       <ion-list>
         <ion-item (click)="mostrarNombre(entrega.student.name)">
-          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-icon slot="start" name="person" color="success"></ion-icon>
           <ion-label>{{entrega.student.name}} </ion-label>
         </ion-item>
         <ion-item (click)="mostrarEmail(entrega.student.email)">
-          <ion-icon slot="start" name="mail" ></ion-icon>
+          <ion-icon slot="start" name="mail" color="success"></ion-icon>
           <p>{{entrega.student.email}} </p>
         </ion-item>
       </ion-list>

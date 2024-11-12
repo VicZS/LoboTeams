@@ -4,54 +4,45 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding computadora">
   <ion-list>
 
-    <ion-button (click)="IrChats()" fill="clear">
-      <ion-item>
-        <ion-icon name="chatbubbles" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top">
+        <ion-icon color="secondary" name="chatbubbles" slot="start" size="large"></ion-icon>
         <ion-label>Chats</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button routerLink="/calendario" fill="clear">
-      <ion-item>
-        <ion-icon name="calendar" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top" routerLink="/calendario">
+        <ion-icon color="medium" name="calendar" slot="start" size="large"></ion-icon>
         <ion-label>Calendario</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button routerLink="/actividades" fill="clear">
-      <ion-item>
-        <ion-icon name="clipboard" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top" routerLink="/actividades">
+        <ion-icon color="secondary" name="clipboard" slot="start" size="large"></ion-icon>
         <ion-label>Actividades</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button routerLink="/clases" fill="clear">
-      <ion-item>
-        <ion-icon name="school" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top" routerLink="/clases">
+        <ion-icon color="medium" name="school" slot="start" size="large"></ion-icon>
         <ion-label>Mis Clases Inscritas</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button routerLink="/clases-creadas" fill="clear">
-      <ion-item>
-        <ion-icon name="school" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top" routerLink="/clases-creadas">
+        <ion-icon color="secondary" name="school" slot="start" size="large"></ion-icon>
         <ion-label>Mis Clases Creadas</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button routerLink="/todas-clases" fill="clear">
-      <ion-item>
-        <ion-icon name="barcode" slot="start" size="large"></ion-icon>
+      <ion-item class="ion-padding-top" routerLink="/todas-clases">
+        <ion-icon color="medium" name="barcode" slot="start" size="large"></ion-icon>
         <ion-label>Clases Existentes</ion-label>
       </ion-item>
-    </ion-button>
 
-    <ion-button class="ion-padding" (click)="Salir()" expand="block" shape="round">
-      Salir
-    </ion-button>
+    <ion-item class="ion-padding-top">
+      <ion-button fill="clear" (click)="Salir()" color="danger" slot="end">
+        <ion-icon name="exit" size="large"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-item>
 
   </ion-list>
 </ion-content>

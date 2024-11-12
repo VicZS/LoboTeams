@@ -21,7 +21,7 @@
 
   <form *ngIf=!entregado>
     <input id="file-input" type="file" (change)="cargarArchivo($event)">
-
+    <br>
     <ion-button (click)="entregarActividad()" fill="clear">
       <ion-icon slot="icon-only" name="add-circle-outline" size="large"></ion-icon>
       <label>Entregar Actvidad</label>
