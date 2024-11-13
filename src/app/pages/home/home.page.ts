@@ -87,4 +87,13 @@ export class HomePage implements OnInit {
     }
   }
 
+  async mostrarPerfil(){
+    const alert = await this.alert.create({
+      header: 'Perfil ' + this.studentInfo.name,
+      message: this.studentInfo.email,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 }
