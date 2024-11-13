@@ -1,4 +1,5 @@
 <ion-item *ngFor="let i of ListaDeClases" (click)="verDestalles(i.clase)">
+  <ion-icon name="barcode" slot="start" color="secondary"></ion-icon>
 
   <ion-label>{{i.clase.name}}</ion-label>
   <ion-label slot="end">{{i.clase.code}}</ion-label>
