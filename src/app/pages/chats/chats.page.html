@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <h3>Chats de Clases Inscritas</h3>
   <ion-list>
     <app-chats-clases-inscritas [ListaDeClases] = "ClasesInscritas"></app-chats-clases-inscritas>
@@ -18,7 +18,7 @@
   <h3>Chats de Clases Creadas</h3>
 
   <ion-list>
-    <app-chats-clases-creadas [ListaDeClases]="ClasesCreadas"></app-chats-clases-creadas>
+    <app-chats-clases-inscritas [ListaDeClases]="ClasesCreadas"></app-chats-clases-inscritas>
   </ion-list>
 
 </ion-content>

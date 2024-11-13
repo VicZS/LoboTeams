@@ -23,6 +23,8 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
   chatMessages: RespuestaVerChatCompleto[] = [];
   mensajeEscrito: string = '';
 
+  idStudent: number = 2;
+
   @ViewChild(IonContent) content!: IonContent; 
 
   ngOnInit() {
@@ -33,6 +35,10 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
       this.cargarChat();
       this.SesionAbierta();
     }, 500);
+
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 1000);
 
     this.intervaloId = setInterval(() => {
       this.cargarChat();
@@ -76,7 +82,6 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
           response => {
             console.log("Respuesta obtenida:", response);
             this.chatMessages = Array.isArray(response) ? response : [response];
-            this.scrollToBottom();
           },
           error => {
             console.error("Hubo un error, intente de nuevo", error);
@@ -110,6 +115,10 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
             console.log("Mensaje enviado:", response);
             this.cargarChat();
             this.mensajeEscrito = ''; // Limpiar el input después de enviar el mensaje
+
+            setTimeout(() => {
+              this.scrollToBottom();
+            }, 1000);
           },
           error => {
             console.error("Error al enviar el mensaje", error);

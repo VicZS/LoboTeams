@@ -13,16 +13,22 @@
 <ion-content #content>
   <ion-list>
     <ion-item *ngFor="let mensaje of chatMessages">
-      <small> {{ mensaje.student.name }} </small>
-      <small> {{ mensaje.student.email }} </small>
-      <p>{{ mensaje.chat }}</p>
+      <ion-label *ngIf="mensaje.student.id !== idStudent">
+        <div style="display: flex; align-items: center;">
+          <strong style="margin-right: 5px;">{{ mensaje.student.name }}</strong>
+          <small style="color: gray;">({{ mensaje.student.email }})</small>
+        </div>
+        <p style="margin-top: 5px;" color="dark">{{ mensaje.chat }}</p>
+      </ion-label>
+      <ion-label *ngIf="mensaje.student.id === idStudent" class="ion-text-right" color="dark">
+        {{ mensaje.chat }}
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
 
 <footer class="ion-padding">
   <ion-toolbar>
-    <ion-icon class="ion-padding-start" slot="start" name="create"></ion-icon>
     <ion-input class="ion-padding" type="text" [(ngModel)]="mensajeEscrito" placeholder="Mensaje..."></ion-input>
     <ion-icon class="ion-padding-end" slot="end" name="send" (click)="enviarMensaje()"></ion-icon>
   </ion-toolbar>
