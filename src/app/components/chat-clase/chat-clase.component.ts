@@ -73,6 +73,10 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
     }
   }
 
+  numMensajesChat : number = 0;
+  chatMessagesAux: RespuestaVerChatCompleto[] = [];
+  
+
   async cargarChat() {
     try {
       this.SesionAbierta();
@@ -82,7 +86,13 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
         .subscribe(
           response => {
             console.log("Respuesta obtenida:", response);
-            this.chatMessages = Array.isArray(response) ? response : [response];
+            this.chatMessagesAux = Array.isArray(response) ? response : [response];
+
+            if(this.chatMessagesAux.length != this.chatMessages.length){
+              this.chatMessages = Array.isArray(response) ? response : [response];
+              this.scrollToBottom();
+            }
+
           },
           error => {
             console.error("Hubo un error, intente de nuevo", error);
