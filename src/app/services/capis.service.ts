@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada, RespuestaObtenerDocente, RespuestaTodasMisAsignaciones, RespuestaAsignacionesEntregadasDeMiClaseCreada, RespuestaVerChatCompleto } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada, RespuestaObtenerDocente, RespuestaTodasMisAsignaciones, RespuestaAsignacionesEntregadasDeMiClaseCreada, RespuestaVerChatCompleto, RespuestaMiPerfil } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -201,6 +201,14 @@ export class CApisService {
 
     return this.http.post('https://loboteam.aftermatch.website/api/chat',clase)
 
+  }
+
+  PostObtenerMiPerfil(token:string){
+    var miPerfil = {
+      "token": token
+    }
+
+    return this.http.post<RespuestaMiPerfil>('https://loboteam.aftermatch.website/api/my-info',miPerfil)
   }
 
   async GuardarToken(token:string){

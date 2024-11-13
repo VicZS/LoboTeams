@@ -1,13 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Bienvenido</ion-title>
+    <ion-title>Bienvenido {{studentInfo.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  
   <ion-list>
 
-      <ion-item class="ion-padding-top" routerLink="/chats">
+      <ion-item routerLink="/chats">
         <ion-icon color="secondary" name="chatbubbles" slot="start" size="large"></ion-icon>
         <ion-label>Chats</ion-label>
       </ion-item>

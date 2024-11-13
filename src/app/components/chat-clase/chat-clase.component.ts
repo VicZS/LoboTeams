@@ -23,13 +23,14 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
   chatMessages: RespuestaVerChatCompleto[] = [];
   mensajeEscrito: string = '';
 
-  idStudent: number = 2;
+  idStudent: number = 0;
 
   @ViewChild(IonContent) content!: IonContent; 
 
   ngOnInit() {
     console.log('El id de la clase es: ', this.idClase);
     this.presentLoading();
+    this.obtenerMyPerfil();
 
     setTimeout(() => {
       this.cargarChat();
@@ -139,6 +140,33 @@ export class ChatClaseComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.content.scrollToBottom(300); // Desplaza suavemente hacia el final en 300ms
     }, 100);
+  }
+
+  async obtenerMyPerfil() {
+    try {
+      this.SesionAbierta();
+      const token = await this.cliente.obtenerToken();
+
+      this.cliente.PostObtenerMiPerfil(token)
+        .subscribe(
+          response => {
+            console.log("Respuesta obtenida:", response);
+            this.idStudent=response.id;
+
+          },
+          error => {
+            console.error("Hubo un error, intente de nuevo", error);
+          }
+        );
+    } catch (error) {
+      console.error("Error al cargar el chat:", error);
+      const alert = await this.alert.create({
+        header: 'Error',
+        message: 'No se pudo obtener el Perfil del Usuario. Intenta nuevamente.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 
 }
