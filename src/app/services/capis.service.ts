@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada, RespuestaObtenerDocente, RespuestaTodasMisAsignaciones, RespuestaAsignacionesEntregadasDeMiClaseCreada } from '../interfaces';
+import { LoginResponse, respuestaAgregarUnirmeClase, respuestaCrearClase, respuestaMisClasesCreadas,DetallesClase, respuestaCreacionAsignacion, RespuestaAsignacionClase, RespuestaActividadEntregada, RespuestaObtenerDocente, RespuestaTodasMisAsignaciones, RespuestaAsignacionesEntregadasDeMiClaseCreada, RespuestaVerChatCompleto } from '../interfaces';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -179,6 +179,27 @@ export class CApisService {
     }
 
     return this.http.post<RespuestaAsignacionesEntregadasDeMiClaseCreada>('https://loboteam.aftermatch.website/api/entrega-alumnos',clase)
+
+  }
+
+  PostObtenerChatCompletoClase(token:string, idClase:number){
+    var clase = {
+      "token": token,
+      "clase_id": idClase
+    }
+
+    return this.http.post<RespuestaVerChatCompleto>('https://loboteam.aftermatch.website/api/ver-chat',clase)
+
+  }
+
+  PostMandarMensaje(token:string, idClase:number, message:string){
+    var clase = {
+      "token": token,
+      "clase_id": idClase,
+      "chat":message
+    }
+
+    return this.http.post('https://loboteam.aftermatch.website/api/chat',clase)
 
   }
 

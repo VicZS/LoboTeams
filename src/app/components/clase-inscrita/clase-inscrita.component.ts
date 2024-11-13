@@ -23,6 +23,8 @@ export class ClaseInscritaComponent  implements OnInit {
     return;
   }
 
+  
+
   async presentLoading() {
     const loading = await this.loadCtr.create({
       message: 'Cargando...',
@@ -55,7 +57,6 @@ export class ClaseInscritaComponent  implements OnInit {
     });
 
     modal.present();
-
   }
 
 }

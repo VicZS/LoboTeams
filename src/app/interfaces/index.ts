@@ -167,3 +167,13 @@ export interface InfoEstudianteEntrega{
     name: string;
     email: string;
 }
+
+//////////////////////////////////////////
+export interface RespuestaVerChatCompleto {
+    id: number;
+    chat: string;
+    student_id: number;
+    created_at: string;
+    updated_at: string;
+    student: InfoEstudianteEntrega;
+}
