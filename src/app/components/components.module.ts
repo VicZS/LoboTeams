@@ -13,6 +13,9 @@ import { ChatsClasesInscritasComponent } from './chats-clases-inscritas/chats-cl
 import { ChatsClasesCreadasComponent } from './chats-clases-creadas/chats-clases-creadas.component';
 import { ChatClaseComponent } from './chat-clase/chat-clase.component';
 
+import { FormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -31,7 +34,7 @@ import { ChatClaseComponent } from './chat-clase/chat-clase.component';
     
   ],
   imports: [
-    CommonModule,IonicModule
+    CommonModule,IonicModule, FormsModule
   ],
   exports:[
     ClaseComponent, 

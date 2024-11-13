@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { AlertController, IonContent, LoadingController, ModalController } from '@ionic/angular';
 import { RespuestaVerChatCompleto } from 'src/app/interfaces';
 import { CApisService } from 'src/app/services/capis.service';
 
@@ -8,17 +8,25 @@ import { CApisService } from 'src/app/services/capis.service';
   templateUrl: './chat-clase.component.html',
   styleUrls: ['./chat-clase.component.scss'],
 })
-export class ChatClaseComponent  implements OnInit, OnDestroy {
+export class ChatClaseComponent implements OnInit, OnDestroy {
 
-  constructor(private loadCtr:LoadingController, private modalCtr:ModalController, private cliente:CApisService, private alert: AlertController) { };
-  
+  constructor(
+    private loadCtr: LoadingController,
+    private modalCtr: ModalController,
+    private cliente: CApisService,
+    private alert: AlertController
+  ) { }
+
   private intervaloId: any;
 
-  @Input() idClase:number = 0;
-  
+  @Input() idClase: number = 0;
+  chatMessages: RespuestaVerChatCompleto[] = [];
+  mensajeEscrito: string = '';
+
+  @ViewChild(IonContent) content!: IonContent; 
 
   ngOnInit() {
-    console.log('El id de la clase es: ', this.idClase)
+    console.log('El id de la clase es: ', this.idClase);
     this.presentLoading();
 
     setTimeout(() => {
@@ -29,8 +37,6 @@ export class ChatClaseComponent  implements OnInit, OnDestroy {
     this.intervaloId = setInterval(() => {
       this.cargarChat();
     }, 2000);
-
-    return;
   }
 
   ngOnDestroy() {
@@ -48,49 +54,36 @@ export class ChatClaseComponent  implements OnInit, OnDestroy {
     await loading.present();
   }
 
-  regresar(){
-    this.modalCtr.dismiss()
+  regresar() {
+    this.modalCtr.dismiss();
   }
 
-  async SesionAbierta(){
-
-    var SesionA = await this.cliente.obtenerToken();
-    console.log(SesionA);
-
-    if(SesionA){
-      console.log("sesion abierta")
-    }else{
-      console.log("sesion noooo abierta")
+  async SesionAbierta() {
+    const SesionA = await this.cliente.obtenerToken();
+    if (!SesionA) {
+      console.log("Sesión no abierta, redirigiendo...");
       window.location.href = "/";
     }
-
   }
 
-  chatMessages: RespuestaVerChatCompleto[] = [];
-
-
-  async cargarChat(){
+  async cargarChat() {
     try {
       this.SesionAbierta();
-      
-      var token = await this.cliente.obtenerToken();
+      const token = await this.cliente.obtenerToken();
 
       this.cliente.PostObtenerChatCompletoClase(token, this.idClase)
         .subscribe(
-          async response => {
+          response => {
             console.log("Respuesta obtenida:", response);
             this.chatMessages = Array.isArray(response) ? response : [response];
-            //console.log(this.entregasEstudiantes)
-            
+            this.scrollToBottom();
           },
-          async error => {
-            console.error("Hubo un error, intente de nuevo");
-            
+          error => {
+            console.error("Hubo un error, intente de nuevo", error);
           }
         );
-  
     } catch (error) {
-      console.error("Error al cargar las entregas:", error);
+      console.error("Error al cargar el chat:", error);
       const alert = await this.alert.create({
         header: 'Error',
         message: 'No se pudo cargar el Chat. Intenta nuevamente.',
@@ -100,41 +93,43 @@ export class ChatClaseComponent  implements OnInit, OnDestroy {
     }
   }
 
-  async mandarMensaje(mensaje:string){
+  enviarMensaje() {
+    if (this.mensajeEscrito.trim()) {
+      this.mandarMensaje(this.mensajeEscrito);
+    }
+  }
+
+  async mandarMensaje(mensaje: string) {
     try {
       this.SesionAbierta();
-
-      var token = await this.cliente.obtenerToken();
+      const token = await this.cliente.obtenerToken();
 
       this.cliente.PostMandarMensaje(token, this.idClase, mensaje)
         .subscribe(
-          async response => {
-            console.log("Respuesta obtenida del mensaje enviado:", response);
+          response => {
+            console.log("Mensaje enviado:", response);
             this.cargarChat();
-
-
+            this.mensajeEscrito = ''; // Limpiar el input después de enviar el mensaje
           },
-          async error => {
-            console.error("Hubo un error, intente de nuevo");
-            
+          error => {
+            console.error("Error al enviar el mensaje", error);
           }
         );
-  
     } catch (error) {
       console.error("Error al enviar el mensaje:", error);
       const alert = await this.alert.create({
         header: 'Error',
-        message: 'No se pudo enviar mensaje al Chat. Intenta nuevamente.',
+        message: 'No se pudo enviar el mensaje. Intenta nuevamente.',
         buttons: ['OK']
       });
       await alert.present();
     }
   }
-  
-  mensajeEscrito:string = '';
-  
-  async obtenerMensaje(){
 
+  scrollToBottom() {
+    setTimeout(() => {
+      this.content.scrollToBottom(300); // Desplaza suavemente hacia el final en 300ms
+    }, 100);
   }
 
 }
